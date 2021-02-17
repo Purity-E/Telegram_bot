@@ -2,7 +2,7 @@
 import sys
 import os
 import logging
-sys.path.append('c:/users/jorn/anaconda3/lib/site-packages')
+
 from dotenv import load_dotenv
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove
 from telegram.ext import Updater, CommandHandler, CallbackContext,MessageHandler, Filters, CallbackQueryHandler,ConversationHandler
