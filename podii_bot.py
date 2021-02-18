@@ -11,7 +11,7 @@ logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s
                      level=logging.INFO)
 logger = logging.getLogger(__name__)
 # getting my token from env file
-load_dotenv("D:/Purity/code/bot/.env")
+load_dotenv("D:/Purity/Podii_bot/.env")
 Token = os.getenv('TOKEN')
 # This function replies with 'Hello <user.first_name>'
 def start(update: Update, context: CallbackContext) -> None:
