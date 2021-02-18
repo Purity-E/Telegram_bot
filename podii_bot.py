@@ -28,7 +28,7 @@ def rsvp(update: Update, context: CallbackContext) -> int:
 rsvp_handler = CommandHandler('rsvp', rsvp)
 # this function replies to text sent to the bot that are not commands
 def reply(update: Update, context: CallbackContext) -> None:
-    update.message.reply_text('Okay thank you. Type /cancel when you are done.')
+    update.message.reply_text('Okay thank you. Type /start to begin or /cancel when you are done.')
 reply_handler = MessageHandler(Filters.text & (~Filters.command), reply)
 # this function handles the cancel command
 def cancel(update: Update, context: CallbackContext) -> int:
