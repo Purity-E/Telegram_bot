@@ -48,6 +48,12 @@ def get_gender(update: Update, context: CallbackContext) -> int:
         reply_markup=ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True),
     )
     return ATTENDING
+def get_attending(update: Update, context: CallbackContext) -> int:
+    data['attending'] = update.message.text
+    update.message.reply_text(
+        'Perfect. Thank you for your time.', reply_markup=ReplyKeyboardRemove()
+    )
+    return ConversationHandler.END
 def cancel(update: Update, context: CallbackContext) -> int:
     data['attending'] = update.message.text
     update.message.reply_text(
@@ -72,7 +78,7 @@ my_conversation_handler = ConversationHandler(
        ],
        ATTENDING: [
            CommandHandler('cancel', cancel),  # has to be before MessageHandler to catch `/cancel` as command, not as `attending`
-           MessageHandler(Filters.regex('^(Yes|No)$'), get_gender)
+           MessageHandler(Filters.regex('^(Yes|No)$') & ~Filters.command, get_attending)
        ],
    },
    fallbacks=[CommandHandler('cancel', cancel)]
@@ -80,7 +86,7 @@ my_conversation_handler = ConversationHandler(
 
 # this function replies to text sent to the bot that are not commands
 def reply(update: Update, context: CallbackContext) -> None:
-    update.message.reply_text('Okay thank you. Type /start to begin or /cancel when you are done.')
+    update.message.reply_text('Okay thank you. Type /start to begin or /cancel to end the conversation.')
 reply_handler = MessageHandler(Filters.text & (~Filters.command), reply)
 # this function handles any unknown command
 def unknown(update: Update, context: CallbackContext) -> None:
