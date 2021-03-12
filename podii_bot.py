@@ -8,6 +8,13 @@ from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup, ReplyKe
 from telegram.ext import Updater, CommandHandler, CallbackContext,MessageHandler, Filters, CallbackQueryHandler,ConversationHandler
 # creating a user dictionaries
 data = {'name': "", 'age': "", 'gender': "", 'attending':""}
+# saving the dictionary as csv
+import csv  
+field_names = ['name', 'age', 'gender', 'attending']
+with open('Names.csv', 'w') as podii_csv: 
+    writer = csv.DictWriter(podii_csv, fieldnames = field_names) 
+    writer.writeheader() 
+    writer.writerow(data) 
 # --- states use in conversation ---
 
 NAME = 1
