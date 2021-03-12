@@ -86,7 +86,7 @@ my_conversation_handler = ConversationHandler(
 
 # this function replies to text sent to the bot that are not commands
 def reply(update: Update, context: CallbackContext) -> None:
-    update.message.reply_text('Okay thank you. Type /start to begin or /cancel to end the conversation.')
+    update.message.reply_text('Please type /start to begin or /end to end the conversation.')
 reply_handler = MessageHandler(Filters.text & (~Filters.command), reply)
 # this function handles any unknown command
 def unknown(update: Update, context: CallbackContext) -> None:
@@ -94,6 +94,11 @@ def unknown(update: Update, context: CallbackContext) -> None:
                              'Please type the correct one.')
 
 unknown_handler = MessageHandler(Filters.command, unknown)
+def end(update: Update, context: CallbackContext) -> None:
+    update.message.reply_text(
+        'Bye! Thank you so much for your time.'
+    )
+end_handler = MessageHandler(Filters.command, end)
 
 updater = Updater(Token)
 # run the start function
@@ -102,7 +107,15 @@ updater.dispatcher.add_handler(my_conversation_handler)
 updater.dispatcher.add_handler(reply_handler)
 # run the unknown function
 updater.dispatcher.add_handler(unknown_handler)
+# run the end function
+updater.dispatcher.add_handler(end_handler)
 # Connect to Telegram and wait for messages
 updater.start_polling()
+# writing the dict data and saving
+with open('mycsvDict.csv', 'w') as f:
+    import csv
+    w = csv.DictWriter(f, data.keys())
+    w.writeheader()
+    w.writerow(data)
 # Keep the program running until interrupted
 updater.idle()
