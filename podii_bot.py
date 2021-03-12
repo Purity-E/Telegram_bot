@@ -111,11 +111,5 @@ updater.dispatcher.add_handler(unknown_handler)
 updater.dispatcher.add_handler(end_handler)
 # Connect to Telegram and wait for messages
 updater.start_polling()
-# writing the dict data and saving
-with open('mycsvDict.csv', 'w') as f:
-    import csv
-    w = csv.DictWriter(f, data.keys())
-    w.writeheader()
-    w.writerow(data)
 # Keep the program running until interrupted
 updater.idle()
