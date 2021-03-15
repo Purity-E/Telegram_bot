@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove
 from telegram.ext import Updater, CommandHandler, CallbackContext,MessageHandler, Filters, CallbackQueryHandler,ConversationHandler
 # creating a user dictionaries
-data = {'name': "", 'age': "", 'gender': "", 'attending':""}
+data = {}
 # saving the dictionary as csv
 import csv  
 field_names = ['name', 'age', 'gender', 'attending']
