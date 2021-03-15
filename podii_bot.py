@@ -31,7 +31,7 @@ def start(update: Update, context: CallbackContext) -> int:
     data = {'name': "", 'age': "", 'gender': "", 'attending':""}
     update.message.reply_text(f'Hello {update.effective_user.first_name} I am a bot. \n'
                               'It is nice to meet you.\n'
-                              'Send /cancel to end this conversation but to preceed please write your full names')
+                              'Please write your full names or send /cancel to end this conversion.')
      # next state in conversation 
     return NAME                          
 def get_name(update: Update, context: CallbackContext) -> int:
@@ -58,13 +58,14 @@ def get_gender(update: Update, context: CallbackContext) -> int:
 def get_attending(update: Update, context: CallbackContext) -> int:
     data['attending'] = update.message.text
     update.message.reply_text(
-        'Perfect. Thank you for your time.', reply_markup=ReplyKeyboardRemove()
+        'Perfect. Thank you for your time. \n', reply_markup=ReplyKeyboardRemove()
     )
     return ConversationHandler.END
 def cancel(update: Update, context: CallbackContext) -> int:
     data['attending'] = update.message.text
     update.message.reply_text(
-        'Bye! Thank you so much for your time.', reply_markup=ReplyKeyboardRemove()
+        'Bye! Thank you so much for your time.\n'
+        'Type /info to view your data.', reply_markup=ReplyKeyboardRemove()
     )
     return ConversationHandler.END
 # creating coversation
@@ -101,6 +102,15 @@ def unknown(update: Update, context: CallbackContext) -> None:
                              'Please type the correct one.')
 
 unknown_handler = MessageHandler(Filters.command, unknown)
+# this function prints data
+def print_data():
+    get_data = print(data)
+    return get_data
+# this function shows the printed data
+def info(update: Update, context: CallbackContext) -> None:
+    update.message.reply_text(print_data())
+data_handler = MessageHandler(Filters.command, info)
+# this function ends the conversion
 def end(update: Update, context: CallbackContext) -> None:
     update.message.reply_text(
         'Bye! Thank you so much for your time.'
@@ -114,6 +124,8 @@ updater.dispatcher.add_handler(my_conversation_handler)
 updater.dispatcher.add_handler(reply_handler)
 # run the unknown function
 updater.dispatcher.add_handler(unknown_handler)
+# run the data handler
+updater.dispatcher.add_handler(data_handler)
 # run the end function
 updater.dispatcher.add_handler(end_handler)
 # Connect to Telegram and wait for messages
