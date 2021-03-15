@@ -58,14 +58,14 @@ def get_gender(update: Update, context: CallbackContext) -> int:
 def get_attending(update: Update, context: CallbackContext) -> int:
     data['attending'] = update.message.text
     update.message.reply_text(
-        'Perfect. Thank you for your time. \n', reply_markup=ReplyKeyboardRemove()
+        'Perfect. Thank you for your time. \n'
+        'Type /info to view your data.', reply_markup=ReplyKeyboardRemove()
     )
     return ConversationHandler.END
 def cancel(update: Update, context: CallbackContext) -> int:
     data['attending'] = update.message.text
     update.message.reply_text(
-        'Bye! Thank you so much for your time.\n'
-        'Type /info to view your data.', reply_markup=ReplyKeyboardRemove()
+        'Bye! Thank you so much for your time.', reply_markup=ReplyKeyboardRemove()
     )
     return ConversationHandler.END
 # creating coversation
