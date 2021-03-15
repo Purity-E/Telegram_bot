@@ -122,12 +122,12 @@ updater = Updater(Token)
 updater.dispatcher.add_handler(my_conversation_handler)
 # run the relpy function
 updater.dispatcher.add_handler(reply_handler)
-# run the unknown function
-updater.dispatcher.add_handler(unknown_handler)
 # run the data handler
 updater.dispatcher.add_handler(data_handler)
 # run the end function
 updater.dispatcher.add_handler(end_handler)
+# run the unknown function
+updater.dispatcher.add_handler(unknown_handler)
 # Connect to Telegram and wait for messages
 updater.start_polling()
 # Keep the program running until interrupted
