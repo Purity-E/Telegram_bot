@@ -28,7 +28,7 @@ Token = os.getenv('TOKEN')
 def start(update: Update, context: CallbackContext) -> int:
     global data # to assign new dictionary to external/global variable
      # create new empty dictionary
-    data = {'name': "", 'age': "", 'gender': "", 'attending':""}
+    data = {}
     update.message.reply_text(f'Hello {update.effective_user.first_name} I am a bot. \n'
                               'It is nice to meet you.\n'
                               'Please write your full names or send /cancel to end this conversion.')
