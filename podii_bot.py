@@ -107,7 +107,7 @@ def print_data():
     get_data = print(data)
     return get_data
 # this function shows the printed data
-def info(update: Update, context: CallbackContext) -> None:
+def info(update: Update, context: CallbackContext):
     update.message.reply_text(print_data())
 data_handler = MessageHandler(Filters.command, info)
 # this function ends the conversion
