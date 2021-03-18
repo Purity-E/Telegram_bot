@@ -20,9 +20,7 @@ load_dotenv("D:/Purity/Podii_bot/.env")
 Token = os.getenv('TOKEN')
 # This function replies with 'Hello <user.first_name>'
 def start(update: Update, context: CallbackContext) -> int:
-    global data # to assign new dictionary to external/global variable
-     # create new empty dictionary
-    data = {}
+
     update.message.reply_text(f'Hello {update.effective_user.first_name} I am a bot. \n'
                               'It is nice to meet you.\n'
                               'Please write your full names or send /cancel to end this conversion.')
