@@ -27,12 +27,12 @@ def start(update: Update, context: CallbackContext) -> int:
      # next state in conversation 
     return NAME                          
 def get_name(update: Update, context: CallbackContext) -> int:
-    data['name'] = update.message.text 
+    data['name'] = update.message.from_user 
     update.message.reply_text('Please write your age')
     # next state in conversation 
     return AGE
 def get_age(update: Update, context: CallbackContext) -> int:
-    data['age'] = update.message.text
+    data['age'] = update.message.from_user
     reply_keyboard = [['Male', 'Female']]
     update.message.reply_text(
         'What is your gender?',
@@ -40,7 +40,7 @@ def get_age(update: Update, context: CallbackContext) -> int:
     )
     return GENDER 
 def get_gender(update: Update, context: CallbackContext) -> int:
-    data['gender'] = update.message.text
+    data['gender'] = update.message.from_user
     reply_keyboard = [['Yes', 'No']]
     update.message.reply_text(
         'Will you be attending our event?',
@@ -48,14 +48,14 @@ def get_gender(update: Update, context: CallbackContext) -> int:
     )
     return ATTENDING
 def get_attending(update: Update, context: CallbackContext) -> int:
-    data['attending'] = update.message.text
+    data['attending'] = update.message.from_user
     update.message.reply_text(
         'Perfect. Thank you for your time. \n'
         'Type /info to view your data.', reply_markup=ReplyKeyboardRemove()
     )
     return ConversationHandler.END
 def cancel(update: Update, context: CallbackContext) -> int:
-    data['attending'] = update.message.text
+    
     update.message.reply_text(
         'Bye! Thank you so much for your time.', reply_markup=ReplyKeyboardRemove()
     )
